@@ -8,4 +8,4 @@ A simple Streamlit app to search and display research papers based on custom key
 - Clean and user-friendly interface
 
 ## Here's The Sample Output of the Project
-![image alt]()
+![image alt](https://github.com/Sakthishri16/Research-Paper-Finder/blob/6d989851add182ece7695a2b0b47dbfde9dff009/Sample%20output.jpg)
