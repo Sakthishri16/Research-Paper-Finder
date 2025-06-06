@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #4A90E2, #1446A0);
+            color: #333;
+        }
+
+        .container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+            color: #1446A0;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .input-group label {
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #333;
+        }
+
+        .input-group input {
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .input-group input:focus {
+            border-color: #4A90E2;
+            outline: none;
+            box-shadow: 0px 0px 8px rgba(74, 144, 226, 0.3);
+        }
+
+        .btn {
+            background: #1446A0;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .btn:hover {
+            background: #4A90E2;
+        }
+
+        p {
+            margin-top: 1rem;
+            font-size: 14px;
+        }
+
+        p a {
+            color: #1446A0;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        p a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Register</h2>
+        <input type="email" id="reg-email" placeholder="Email" class="input-group input">
+        <input type="password" id="reg-password" placeholder="Password" class="input-group input">
+        <button onclick="register()" class="btn">Register</button>
+        <p>Already have an account? <a href="/login">Login</a></p>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-app.js";
+            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.7/firebase-auth.js";
+
+            const firebaseConfig = {
+                apiKey: "",
+                authDomain: "",
+                projectId: "",
+                storageBucket: "",
+                messagingSenderId: "",
+                appId: ""
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth(app);
+
+            window.register = function () {
+                const email = document.getElementById("reg-email").value;
+                const password = document.getElementById("reg-password").value;
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        console.log("User registered:", userCredential.user);
+                        alert("Registration successful! You can now log in.");
+                        window.location.href = "/login";
+                    })
+                    .catch((error) => {
+                        console.error("Error registering:", error.message);
+                        alert(error.message);
+                    });
+            };
+        </script>
+    </div>
+</body>
+</html>
